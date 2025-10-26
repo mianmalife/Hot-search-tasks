@@ -1,0 +1,22 @@
+name: Run Python Script Every 30 Minutes
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'   # 每半小时（UTC），即北京时间每半小时
+  workflow_dispatch:          # 允许手动触发
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Run Python script
+        run: uv run main.py
