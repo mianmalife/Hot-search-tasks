@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: '*/30 * * * *'   # 每半小时（UTC），即北京时间每半小时
+    - cron: '0 */2 * * *'   # 每2小时（UTC），即北京时间每半小时
   workflow_dispatch:          # 允许手动触发
 
 jobs:
