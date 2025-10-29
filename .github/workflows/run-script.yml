@@ -36,12 +36,16 @@ jobs:
           # git add hotsearch.json
           # git commit -m "update hotsearch.json at $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')" || echo "no changes"
           # git push
-      - name: Deploy hotsearch.json to gh-pages
+      - name: Get current Beijing time
+        id: time
+        run: echo "TIME=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+
+      - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./
-          keep_files: true  # 保留旧文件（只覆盖 hotsearch.json）
-          commit_message: "update hotsearch.json at $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')"
+          #keep_files: true  # 保留旧文件，只覆盖 hotsearch.json
+          commit_message: "github-actions[bot] update hotsearch.json at ${{ env.TIME }}"
 
