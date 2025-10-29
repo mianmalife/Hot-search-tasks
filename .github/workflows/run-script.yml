@@ -22,7 +22,10 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Run Python script
-        run: uv run main.py
+        run: |
+          mkdir -p dist
+          uv run main.py
+          mv hotsearch.json dist/
 
       # - name: Upload result file
       #   uses: actions/upload-artifact@v4
@@ -45,7 +48,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./
+          publish_dir: ./dist
+          force_orphan: true  # 强制覆盖，确保只保留 dist 下的文件
           #keep_files: false  # 保留旧文件，只覆盖 hotsearch.json
           commit_message: "github-actions[bot] update hotsearch.json at ${{ env.TIME }}"
 
