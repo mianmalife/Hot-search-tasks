@@ -46,6 +46,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./
-          #keep_files: true  # 保留旧文件，只覆盖 hotsearch.json
+          keep_files: true  # 保留旧文件，只覆盖 hotsearch.json
           commit_message: "github-actions[bot] update hotsearch.json at ${{ env.TIME }}"
 
